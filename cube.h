@@ -6,7 +6,7 @@
 /*   By: aoudija <aoudija@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 14:51:09 by aoudija           #+#    #+#             */
-/*   Updated: 2023/06/05 13:07:53 by aoudija          ###   ########.fr       */
+/*   Updated: 2023/06/07 09:10:16 by aoudija          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define radian 0.01745329251994329576
 
 
-typedef struct	s_data
+typedef struct	s_g_data
 {
 	void	*mlx;
 	void	*win;
@@ -35,14 +35,21 @@ typedef struct	s_data
 	int		line_length;
 	int		endian;
 	char	**map;
+}				t_data;
+t_data	*g_data;
+
+typedef struct s_crd
+{
 	double	px;
 	double	py;
-	char	**inter_point;
 	double	alpha;
-	int		xa;
-	int		ya;
-}				t_data;
-t_data	*data;
+	int		dir;
+	int		x_h;
+	int		y_h;
+	int		x_v;
+	int		y_v;
+}				t_crd;
+t_crd	*g_crd;
 
 char	*get_next_line(int fd);
 void	player_x_y(void);
@@ -52,5 +59,12 @@ int		ip_x_v();
 int		ip_y_v();
 int		distance_to_the_slice(void);
 int		projected_height(void);
+void	draw_line(int x, int y, int color);
+void	my_mlx_pixel_put(int x, int y, int color);
+void	dda(int X0, int Y0, int X1, int Y1);
+int		player_up();
+int		player_down();
+int		player_left();
+int		player_right();
 
 #endif
