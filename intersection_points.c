@@ -18,8 +18,9 @@ int	ip_y_h()
 	int	v;
 
 	// printf("y_h:direction: %d\n", g_crd->dir);
-	if (g_crd->alpha >= 180 && g_crd->alpha <= 360)
-		v = -1;
+	if ((g_crd->alpha <= 90 && g_crd->alpha >=0)
+		|| (g_crd->alpha <= 360 && g_crd->alpha >= 270))
+		v = -128;
 	else
 		v = 128;
 	y = (int)(g_crd->py) * 128 + v;
@@ -42,8 +43,8 @@ int	ip_x_v()
 	int	x;
 	int	v;
 
-	if (g_crd->alpha >= 90 && g_crd->alpha <= 270)
-		v = -1;
+	if (g_crd->alpha <= 360 && g_crd->alpha >= 180)
+		v = -128;
 	else
 		v = 128;
 	x = (int)(g_crd->px) * 128 + v;

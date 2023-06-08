@@ -6,7 +6,7 @@
 /*   By: aoudija <aoudija@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 14:43:53 by aoudija           #+#    #+#             */
-/*   Updated: 2023/06/07 21:20:28 by aoudija          ###   ########.fr       */
+/*   Updated: 2023/06/08 17:59:27 by aoudija          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,20 +100,20 @@ void	draw_map_two_d()
 		}
 	}
 	player_x_y();
-	int xh,yh;
-	// if (g_crd->alpha >= 90 && g_crd->alpha <= 270)
-	// {
-	// 	xh = ip_x_v();
-	// 	yh = ip_y_v();
-	// }
-	// else
-	// {
-		xh = ip_x_h();
-		yh = ip_y_h();
-	// }
-	// if (xh / 128 < 0 || xh / 128 > 5)
-		// (xh = ip_x_v(),yh = ip_y_v());
-	dda(g_crd->px * 128, g_crd->py * 128, xh, yh);
+	if ((g_crd->alpha >= 225 && g_crd->alpha <= 315)
+		|| (g_crd->alpha >= 45 && g_crd->alpha <= 135))
+	{
+		x = ip_x_h();
+		y = ip_y_h();
+	}
+	else if ((g_crd->alpha <= 45 && g_crd->alpha >=0)
+		|| (g_crd->alpha <= 360 && g_crd->alpha >= 315)
+		|| (g_crd->alpha <= 225 && g_crd->alpha >= 135))
+	{
+		x = ip_y_v();
+		y = ip_x_v();
+	}
+	dda(g_crd->px * 128, g_crd->py * 128, x, y);
 	mlx_put_image_to_window(g_data->mlx,g_data->win, g_data->img, 0, 0);
 }
 
@@ -141,11 +141,7 @@ int	key_press(int keycode,void *ptr)
 	if (keycode == 0)
 	{
 		g_crd->alpha++;
-		if (g_crd->alpha  == 0)
-			g_crd->alpha = 359;
-		else if (g_crd->alpha  == 180)
-			g_crd->alpha = 179;
-		else if (g_crd->alpha == 360)
+		if (g_crd->alpha == 359)
 			g_crd->alpha = 1;
 	}
 	else if (keycode == 2)
@@ -153,13 +149,7 @@ int	key_press(int keycode,void *ptr)
 		g_crd->alpha--;
 		if (g_crd->alpha  == 0)
 			g_crd->alpha = 359;
-		else if (g_crd->alpha  == 180)
-			g_crd->alpha = 179;
-		else if (g_crd->alpha == 360)
-			g_crd->alpha = 1;
 	}
-	// if (g_crd->alpha == 360)
-	// 	g_crd->alpha--;
 	printf("alpha %f\n", g_crd->alpha);
 	draw_map_two_d();
 	return (0);

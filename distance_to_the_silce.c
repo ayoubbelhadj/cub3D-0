@@ -6,7 +6,7 @@
 /*   By: aoudija <aoudija@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 08:17:53 by aoudija           #+#    #+#             */
-/*   Updated: 2023/06/07 10:04:51 by aoudija          ###   ########.fr       */
+/*   Updated: 2023/06/08 17:31:18 by aoudija          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	wx_horizontal()
 		ya = -128;
 	else
 		g_crd->dir = 128;
-	
 	x = ip_x_h();
 	y = ip_y_h();
 	while (g_data->map[y / 128][x / 128] != '1')
