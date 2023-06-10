@@ -6,7 +6,7 @@
 /*   By: aoudija <aoudija@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 08:17:53 by aoudija           #+#    #+#             */
-/*   Updated: 2023/06/08 17:31:18 by aoudija          ###   ########.fr       */
+/*   Updated: 2023/06/10 13:33:32 by aoudija          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ int	wx_horizontal()
 	int	xa;
 	int	ya;
 
-	xa = 128 / tan(g_crd->alpha * radian);
+	xa = 64 / tan(g_crd->alpha * radian);
 	if (g_crd->dir == 13)
-		ya = -128;
+		ya = -64;
 	else
-		g_crd->dir = 128;
+		g_crd->dir = 64;
 	x = ip_x_h();
 	y = ip_y_h();
-	while (g_data->map[y / 128][x / 128] != '1')
+	while (g_data->map[y / 64][x / 64] != '1')
 	{
 		x += xa;
 		y += ya;
@@ -48,11 +48,11 @@ int	wx_vertical()
 		v = -1;
 	else
 		v = 1;
-	xa = 128 * v;
-	ya = (128 * tan(g_crd->alpha * radian)) * v;
+	xa = 64 * v;
+	ya = (64 * tan(g_crd->alpha * radian)) * v;
 	x = ip_x_v();
 	y = ip_y_v();
-	while (g_data->map[y / 128][x / 128] != '1')
+	while (g_data->map[y / 64][x / 64] != '1')
 	{
 		x += xa;
 		y += ya;
@@ -74,12 +74,12 @@ int	distance_to_the_slice(void)
 	if (PW_H < PW_V)
 	{
 		D = PW_H;
-		dda(g_crd->px * 128, g_crd->py * 128, g_crd->x_h, g_crd->y_h);
+		// dda(g_crd->px * 64, g_crd->py * 64, g_crd->x_h, g_crd->y_h);
 	}
 	else if (PW_H >= PW_V)
 	{
 		D = PW_V;
-		dda(g_crd->px * 128, g_crd->py * 128, g_crd->x_v, g_crd->y_v);
+		// dda(g_crd->px * 64, g_crd->py * 64, g_crd->x_v, g_crd->y_v, 51fb36);
 	}
 	return (D);
 }
@@ -90,9 +90,9 @@ int	projected_height(void)
 	int	D;
 
 	D = distance_to_the_slice();
-	if (g_crd->alpha == 58)
-		g_crd->alpha = 60;
-	ph = (int)(((float)128 / (float)D) * 545);
-	g_crd->alpha -= 0.09;
+	// if (g_crd->alpha == 58)
+	// 	g_crd->alpha = 60;
+	ph = (int)(((float)64 / (float)D) * 545);
+	// g_crd->alpha -= 0.09;
 	return(ph);
 }

@@ -6,7 +6,7 @@
 /*   By: aoudija <aoudija@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 14:51:09 by aoudija           #+#    #+#             */
-/*   Updated: 2023/06/07 09:10:16 by aoudija          ###   ########.fr       */
+/*   Updated: 2023/06/09 21:18:57 by aoudija          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,19 @@ typedef struct s_crd
 }				t_crd;
 t_crd	*g_crd;
 
+typedef struct s_dir
+{
+	int	left_x;
+	int	left_y;
+	int	right_y;
+	int	right_x;
+	int	forward_x;
+	int	forward_y;
+	int	back_x;
+	int	back_y;
+}				t_dir;
+t_dir	*g_dir;
+
 char	*get_next_line(int fd);
 void	player_x_y(void);
 int		ip_y_h();
@@ -61,10 +74,12 @@ int		distance_to_the_slice(void);
 int		projected_height(void);
 void	draw_line(int x, int y, int color);
 void	my_mlx_pixel_put(int x, int y, int color);
-void	dda(int X0, int Y0, int X1, int Y1);
+void	dda(int X0, int Y0, int X1, int Y1, int color);
 int		player_up();
 int		player_down();
 int		player_left();
 int		player_right();
-
+void	send_ray(void);
+int		send_rays(void);
+void	draw_line(int x, int y, int color);
 #endif

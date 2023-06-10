@@ -6,7 +6,7 @@
 /*   By: aoudija <aoudija@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 18:05:08 by aoudija           #+#    #+#             */
-/*   Updated: 2023/06/08 17:58:20 by aoudija          ###   ########.fr       */
+/*   Updated: 2023/06/09 20:48:55 by aoudija          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,47 @@ float	slope(int x0, int y0, int x1, int y1)
 	m = dx / dy;
 	return (m);
 }
-// int x0, int y0, int x1, int y1
-void	dda(int X0, int Y0, int X1, int Y1)
-{
-	int dx = X1 - X0;
-    int dy = Y1 - Y0;
-    // calculate steps required for generating pixels
-    int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
- 
-    // calculate increment in x & y for each steps
-    float Xinc = dx / (float)steps;
-    float Yinc = dy / (float)steps;
 
-    // Put pixel for each step
-    float X = X0;
-    float Y = Y0;
+// void	dda(int x0, int y0, int x1, int y1)
+// {
+//     float	xinc;
+//     float	yinc;
+//     int		steps;
+// 	int		i;
+// 	float	x,y;
+
+// 	if (abs(x1 - x0) > abs(y1 - y0))
+// 		steps = abs(x1 - x0);
+// 	else
+// 		steps = abs(y1 - y0);
+//     xinc = (float)abs(x1 - x0) / (float)steps;
+//     yinc = (float)abs(y1 - y0) / (float)steps;
+// 	i = 0;
+// 	x = (float)x0;
+// 	y = (float)y0;
+// 	while (i <= steps)
+//     {
+// 		my_mlx_pixel_put(x, y, 0x0055c63f);
+// 		i++;
+//         x += xinc;
+//         y += yinc;
+//     }
+// }
+
+void dda(int x0, int y0, int x1, int y1, int color) {
+    int dx = x1 - x0;
+    int dy = y1 - y0;
+    int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
+
+    float xinc = (float)dx / (float)steps;
+    float yinc = (float)dy / (float)steps;
+
+    float x = (float)x0;
+    float y = (float)y0;
+
     for (int i = 0; i <= steps; i++) {
-        my_mlx_pixel_put(X, Y, 0x0055c63f);; // put pixel at (X,Y)
-        X += Xinc;
-        Y += Yinc;
+        my_mlx_pixel_put((int)x, (int)y, color);
+        x += xinc;
+        y += yinc;
     }
 }

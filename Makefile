@@ -6,7 +6,7 @@
 #    By: aoudija <aoudija@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/02 14:44:25 by aoudija           #+#    #+#              #
-#    Updated: 2023/06/07 08:20:36 by aoudija          ###   ########.fr        #
+#    Updated: 2023/06/09 14:07:47 by aoudija          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = cub3D
 
 CC = cc
 
-FLAGS = -g  -Wall -Wextra -Werror
+# FLAGS = -g  -Wall -Wextra -Werror
 
 mlx_FLAGS = -lmlx -framework OpenGL -framework AppKit
 
@@ -31,7 +31,7 @@ LIBFT = $(addprefix  libft/, ft_isdigit ft_memset  ft_isprint ft_putendl_fd ft_i
 		ft_realloc ft_strjoinfree ft_freetab ft_charjoin)
 
 AMINE = cube player_coordinates get_next_line/get_next_line intersection_points \
-		distance_to_the_silce DDA player_moves \
+		distance_to_the_silce DDA player_moves  ray \
 		
 FILES = $(AMINE) $(LIBFT)
 
@@ -43,7 +43,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(HEADER)
 	@printf "$(CURSIVE)$(GRAY)	- Compiling $(NAME)... $(RESET)\n"
-	@$(CC) $(OBJ) $(mlx_FLAGS) -o $(NAME)
+	@$(CC) -g $(OBJ) $(mlx_FLAGS) -o $(NAME)
 	@printf "$(GREEN)    - Executable ready.\n$(RESET)"
 
 %.o: %.c $(HEADER)
