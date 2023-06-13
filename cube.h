@@ -6,7 +6,7 @@
 /*   By: aoudija <aoudija@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 14:51:09 by aoudija           #+#    #+#             */
-/*   Updated: 2023/06/09 21:18:57 by aoudija          ###   ########.fr       */
+/*   Updated: 2023/06/13 13:51:34 by aoudija          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_crd
 	int		y_h;
 	int		x_v;
 	int		y_v;
+	int		color;
 }				t_crd;
 t_crd	*g_crd;
 

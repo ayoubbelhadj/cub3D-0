@@ -6,7 +6,7 @@
 /*   By: aoudija <aoudija@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 14:43:53 by aoudija           #+#    #+#             */
-/*   Updated: 2023/06/10 14:40:21 by aoudija          ###   ########.fr       */
+/*   Updated: 2023/06/13 12:08:18 by aoudija          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	fill_map(void)
 void	draw_line(int x, int y, int color)
 {
 	int y1;
+	int i=0;
 
 	// y1 = y - 64;
 	y1 = 448 - y / 2;
@@ -63,6 +64,7 @@ void	draw_line(int x, int y, int color)
 	while (y1 < y)
 	{
 		my_mlx_pixel_put(x, y1, color);
+		i++;
 		y1++;
 	}
 }
@@ -101,7 +103,7 @@ void	draw_map_two_d()
 	}
 	player_x_y();
 	send_rays();
-	// send_ray();
+	send_ray();
 	mlx_put_image_to_window(g_data->mlx,g_data->win, g_data->img, 0, 0);
 }
 
@@ -127,22 +129,14 @@ int	key_press(int keycode,void *ptr)
 	else if (keycode == 124)
 		player_right();
 	if (keycode == 0)
-	{
-		g_crd->alpha--;
-		if (g_crd->alpha  == 0)
-			g_crd->alpha = 360;
-	}
+		g_crd->alpha -= 5;
 	else if (keycode == 2)
-	{
-		g_crd->alpha += 3;
-		if (g_crd->alpha == 360)
-			g_crd->alpha = 0;
-	}
+		g_crd->alpha += 5;
 	player_x_y();
 	send_rays();
-	mlx_put_image_to_window(g_data->mlx,g_data->win, g_data->img, 0, 0);
-	printf("alpha %f\n", g_crd->alpha);
-	draw_map_two_d();
+	// mlx_put_image_to_window(g_data->mlx,g_data->win, g_data->img, 0, 0);
+	// printf("alpha %f\n", g_crd->alpha);
+	// draw_map_two_d();
 	return (0);
 }
 
@@ -153,11 +147,11 @@ int	main(void)
 	g_crd = malloc(sizeof(t_crd));
 	g_dir = malloc(sizeof(t_dir));
 	g_data->mlx = mlx_init();
-	g_data->win = mlx_new_window(g_data->mlx, 1200, 1200, "Hello world!");
-	g_data->img = mlx_new_image(g_data->mlx, 1200, 1200);
+	g_data->win = mlx_new_window(g_data->mlx, 520, 520, "Hello world!");
+	g_data->img = mlx_new_image(g_data->mlx, 520, 520);
 	g_data->addr = mlx_get_data_addr(g_data->img, &g_data->bits_per_pixel, &g_data->line_length,
 								&g_data->endian);
-	g_crd->alpha = 360;
+	g_crd->alpha = 90;
 	printf("-----------\n");
 	fill_map();
 	player_x_y();

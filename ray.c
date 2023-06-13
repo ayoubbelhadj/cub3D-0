@@ -6,56 +6,103 @@
 /*   By: aoudija <aoudija@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 10:58:23 by aoudija           #+#    #+#             */
-/*   Updated: 2023/06/10 14:34:41 by aoudija          ###   ########.fr       */
+/*   Updated: 2023/06/13 13:51:21 by aoudija          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
+void	draw_floor(int x, int y, int color)
+{
+	int y1;
+
+	y1 = 448 - y / 2 + y;
+	y += y + 448;
+	while (y1 <= y)
+	{
+		my_mlx_pixel_put(x, y1, color);
+		y1++;
+	}
+}
+
+void	draw_ceilling(int x, int y, int color)
+{
+	int y1;
+
+	y1 = 0;
+	y = 448 - y / 2;
+	while (y1 <= y)
+	{
+		my_mlx_pixel_put(x, y1, color);
+		y1++;
+	}
+}
+
 int	send_rays(void)
 {
-	int		x;
-	int		y;
+	double		x;
+	double		y;
 	int		i;
-	int		j;
+	int	j;
+	double	c;
 	double	temp_angle;
-	int	d;
-	int	b;
+	int		d;
+	int		b;
 
 	mlx_clear_window(g_data->mlx,g_data->win);
 	mlx_destroy_image(g_data->mlx,g_data->img);
 	g_data->img = mlx_new_image(g_data->mlx, 1200, 1200);
 		g_data->addr = mlx_get_data_addr(g_data->img, &g_data->bits_per_pixel, &g_data->line_length,
 									&g_data->endian);
-	float c = 64 / 554;
+
+	int w,h;
+	void *img_ptr = mlx_xpm_file_to_image(g_data->mlx, "Amin-64_64-xpm.xpm", &w, &h);
+	int bits_p_pixel;
+	int size_line;
+	int endian;
+	char *img_data = mlx_get_data_addr(img_ptr, &bits_p_pixel, &size_line, &endian);
+	x = y = j = 0;
+	while (x < 64)
+	{
+		y = 0;
+		while (y < 64)
+		{
+			g_crd->color = (int)(img_data[(int)y * size_line + ((int)x * bits_p_pixel) / 8]);
+			my_mlx_pixel_put(x, y, g_crd->color);
+			y++;
+		}
+		x++;
+	}
+	mlx_put_image_to_window(g_data->mlx,g_data->win, g_data->img, 0, 0);
+	return (1);
 	if (g_crd->alpha < 30)
 		temp_angle = (330 + g_crd->alpha);
 	else
 		temp_angle = (g_crd->alpha - 30);
 	double t = temp_angle + 60;
-	x = y = 0;
-	j = 1;
+	x = y = j = 0;
 	while (temp_angle <= t)
 	{
 		x = g_crd->px * 64, y = g_crd->py * 64;
-		i = 1;
-		while (g_data->map[y / 64][x / 64] != '1')
+		i = 0;
+		while (x < 448 && y < 512 && g_data->map[(int)y / 64][(int)x / 64] != '1')
 		{
-			x = cos(temp_angle * radian) * i + g_crd->px * 64 ;
-			y = sin(temp_angle * radian) * i + g_crd->py * 64 ;
+			x = cos(temp_angle * radian) * i + g_crd->px * 64;
+			y = sin(temp_angle * radian) * i + g_crd->py * 64;
 			i++;
 		}
-		d = sqrt((x - g_crd->px * 64) * (x - g_crd->px * 64)
-			+ ((y - g_crd->py * 64) * (y - g_crd->py * 64)));
-		d = (64 * 200) / d;
-		draw_line(j, d, 0x00808080);
+		d = sqrt((g_crd->px * 64 - x) * (g_crd->px * 64 - x)
+			+ ((g_crd->py * 64 - y) * (g_crd->py * 64 - y)));
+	// √((x2 – x1)² + (y2 – y1)²)00006477
+		d = (64 * 443) / d;
+		d *= cos(1.2);
+		draw_line(j, d, 121100001);
+		draw_floor(j, d, 0x0094967262);
+		draw_ceilling(j, d, 0xADD8E6);
 		j++;
-		// dda(g_crd->px * 64, g_crd->py * 64, x, y,  0x0055c63f);
-		temp_angle+=0.09;
+		// dda(g_crd->px * 64, g_crd->py * 64, x, y , 0x0055c63f);
+		temp_angle+=0.11;
 	}
-	printf("j:%d x:%d y:%d\n", j, x, y);
-	mlx_put_image_to_window(g_data->mlx,g_data->win, g_data->img, 0, 0);
-	// √((x2 – x1)² + (y2 – y1)²)
 	return (1);
 }
 

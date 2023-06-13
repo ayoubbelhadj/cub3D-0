@@ -6,7 +6,7 @@
 #    By: aoudija <aoudija@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/02 14:44:25 by aoudija           #+#    #+#              #
-#    Updated: 2023/06/09 14:07:47 by aoudija          ###   ########.fr        #
+#    Updated: 2023/06/11 11:17:43 by aoudija          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ $(NAME): $(OBJ) $(HEADER)
 	@printf "$(GREEN)    - Executable ready.\n$(RESET)"
 
 %.o: %.c $(HEADER)
-	@$(CC) $(FLAGS) -c $< -o $@
+	@$(CC) -g $(FLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJ)
