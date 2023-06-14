@@ -6,7 +6,7 @@
 /*   By: aoudija <aoudija@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 14:51:09 by aoudija           #+#    #+#             */
-/*   Updated: 2023/06/13 13:51:34 by aoudija          ###   ########.fr       */
+/*   Updated: 2023/06/14 14:07:38 by aoudija          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,22 +48,9 @@ typedef struct s_crd
 	int		y_h;
 	int		x_v;
 	int		y_v;
-	int		color;
+	uint32_t	color;
 }				t_crd;
 t_crd	*g_crd;
-
-typedef struct s_dir
-{
-	int	left_x;
-	int	left_y;
-	int	right_y;
-	int	right_x;
-	int	forward_x;
-	int	forward_y;
-	int	back_x;
-	int	back_y;
-}				t_dir;
-t_dir	*g_dir;
 
 char	*get_next_line(int fd);
 void	player_x_y(void);
@@ -83,4 +70,26 @@ int		player_right();
 void	send_ray(void);
 int		send_rays(void);
 void	draw_line(int x, int y, int color);
+
+//pasing
+
+typedef struct	s_pars
+{
+	void	*mlx;
+	void	*win;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	char	**map;
+}				t_pars;
+t_pars	*g_parser;
+int		parsing(char *str);
+int		dot_cub(char *arg);
+int 	all_white(char *str);
+int		check_lines(char *str);
+char	*line_dir(char **tab, char *dir);
+int		check_no(char *str);
+
 #endif

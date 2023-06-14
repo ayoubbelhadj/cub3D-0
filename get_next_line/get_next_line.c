@@ -6,7 +6,7 @@
 /*   By: aoudija <aoudija@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 13:32:26 by aoudija           #+#    #+#             */
-/*   Updated: 2023/06/04 17:44:33 by aoudija          ###   ########.fr       */
+/*   Updated: 2023/06/14 10:42:31 by aoudija          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ char	*ft_read(int fd, char *buffer, char *t)
 		if (i == -1)
 		{
 			if (t)
-			{
-				free(t);
-				t = NULL;
-			}
+				(free(t), t = NULL);
 			return (NULL);
 		}
 		buffer[i] = 0;
@@ -65,31 +62,16 @@ char	*ft_line(char *str)
 	return (line);
 }
 
-char	*remove_line(char *str)
-{
-	int		i;
-	char	*store;
-
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (str[i] != '\n' && str[i])
-		i++;
-	store = ft_substr(str, i + i, ft_strlen(str) - i);
-	// free(str);
-	return (store);
-}
-
 char	*get_next_line(int fd)
 {
-	char		*buffer;
-	static char	*t;
-	char		*line;
+	char	*buffer;
+	char	*read;
+	char	*line;
 
-	buffer = malloc(1 + 1);
-	t = ft_read(fd, buffer, t);
+	line = NULL;
+	buffer = malloc(2);
+	read = ft_read(fd, buffer, line);
 	free(buffer);
-	line = ft_line(t);
-	t = remove_line(t);
+	line = ft_line(read);
 	return (line);
 }

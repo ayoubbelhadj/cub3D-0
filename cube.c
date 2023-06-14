@@ -6,7 +6,7 @@
 /*   By: aoudija <aoudija@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 14:43:53 by aoudija           #+#    #+#             */
-/*   Updated: 2023/06/13 12:08:18 by aoudija          ###   ########.fr       */
+/*   Updated: 2023/06/14 13:24:04 by aoudija          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,27 @@ void	fill_map(void)
 void	draw_line(int x, int y, int color)
 {
 	int y1;
-	int i=0;
-
+	int i;
+// 	int yc,xc;
+// int w,h;
+// 	void *img_ptr = mlx_xpm_file_to_image(g_data->mlx, "resized_wallexample.xpm", &w, &h);
+// 	int bits_p_pixel;
+// 	int size_line;
+// 	int endian;
+// 	char *img_data = mlx_get_data_addr(img_ptr, &bits_p_pixel, &size_line, &endian);
 	// y1 = y - 64;
 	y1 = 448 - y / 2;
 	y += y1;
 	while (y1 < y)
 	{
-		my_mlx_pixel_put(x, y1, color);
-		i++;
+		// if (y1 > 64 || x > 64)
+		// 	{yc = 0;
+		// 	xc = 0;}
+		// else
+		// 	{yc = y1;
+		// 	xc = x;}
+		// g_crd->color = (uint32_t)(img_data[y1 * size_line + (x * bits_p_pixel) / 8]);
+		my_mlx_pixel_put(x, y1, g_crd->color);
 		y1++;
 	}
 }
@@ -120,17 +132,17 @@ int	key_press(int keycode,void *ptr)
 	(void)ptr;
 	if (keycode == 53)
 		exit (0);
-	if (keycode == 126)
+	if (keycode == 13)
 		player_up();
-	else if (keycode == 125)
+	else if (keycode == 1)
 		player_down();
-	else if (keycode == 123)
-		player_left();
-	else if (keycode == 124)
-		player_right();
-	if (keycode == 0)
-		g_crd->alpha -= 5;
 	else if (keycode == 2)
+		player_left();
+	else if (keycode == 0)
+		player_right();
+	if (keycode == 123)
+		g_crd->alpha -= 5;
+	else if (keycode == 124)
 		g_crd->alpha += 5;
 	player_x_y();
 	send_rays();
@@ -140,25 +152,30 @@ int	key_press(int keycode,void *ptr)
 	return (0);
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
-	int d , x , b, j , y, c;
-	g_data = malloc(sizeof(t_data));
-	g_crd = malloc(sizeof(t_crd));
-	g_dir = malloc(sizeof(t_dir));
-	g_data->mlx = mlx_init();
-	g_data->win = mlx_new_window(g_data->mlx, 520, 520, "Hello world!");
-	g_data->img = mlx_new_image(g_data->mlx, 520, 520);
-	g_data->addr = mlx_get_data_addr(g_data->img, &g_data->bits_per_pixel, &g_data->line_length,
-								&g_data->endian);
-	g_crd->alpha = 90;
-	printf("-----------\n");
-	fill_map();
-	player_x_y();
-	send_rays();
-	// draw_map_two_d();
-	mlx_hook(g_data->win, 2, 0, key_press, NULL);
-	mlx_hook(g_data->win, 17, 0, on_close, NULL);
-	mlx_put_image_to_window(g_data->mlx,g_data->win, g_data->img, 0, 0);
-	mlx_loop(g_data->mlx);
+	if (ac == 2)
+	{
+		g_parser = malloc(sizeof(t_pars));
+		if (!parsing(av[1]))
+			return (0);
+		// int d , x , b, j , y, c;
+		// g_data = malloc(sizeof(t_data));
+		// g_crd = malloc(sizeof(t_crd));
+		// g_data->mlx = mlx_init();
+		// g_data->win = mlx_new_window(g_data->mlx, 520, 520, "Hello world!");
+		// g_data->img = mlx_new_image(g_data->mlx, 520, 520);
+		// g_data->addr = mlx_get_data_addr(g_data->img, &g_data->bits_per_pixel, &g_data->line_length,
+		// 							&g_data->endian);
+		// g_crd->alpha = 0;
+		// printf("-----------\n");
+		// fill_map();
+		// player_x_y();
+		// send_rays();
+		// // draw_map_two_d();
+		// mlx_hook(g_data->win, 2, 0, key_press, NULL);
+		// mlx_hook(g_data->win, 17, 0, on_close, NULL);
+		// mlx_put_image_to_window(g_data->mlx,g_data->win, g_data->img, 0, 0);
+		// mlx_loop(g_data->mlx);
+	}
 }

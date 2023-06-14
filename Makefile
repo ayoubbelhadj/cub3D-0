@@ -6,7 +6,7 @@
 #    By: aoudija <aoudija@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/02 14:44:25 by aoudija           #+#    #+#              #
-#    Updated: 2023/06/11 11:17:43 by aoudija          ###   ########.fr        #
+#    Updated: 2023/06/14 13:11:56 by aoudija          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,8 +31,9 @@ LIBFT = $(addprefix  libft/, ft_isdigit ft_memset  ft_isprint ft_putendl_fd ft_i
 		ft_realloc ft_strjoinfree ft_freetab ft_charjoin)
 
 AMINE = cube player_coordinates get_next_line/get_next_line intersection_points \
-		distance_to_the_silce DDA player_moves  ray \
-		
+		distance_to_the_silce DDA player_moves  ray parsing/parsing parsing/p_utils/check_extension \
+		parsing/p_utils/check_lines parsing/p_utils/mini_utils parsing/p_utils/check_no
+
 FILES = $(AMINE) $(LIBFT)
 
 SRC		= $(FILES:=.c)
@@ -43,7 +44,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(HEADER)
 	@printf "$(CURSIVE)$(GRAY)	- Compiling $(NAME)... $(RESET)\n"
-	@$(CC) -g $(OBJ) $(mlx_FLAGS) -o $(NAME)
+	@$(CC) $(OBJ) $(mlx_FLAGS) -o $(NAME)
 	@printf "$(GREEN)    - Executable ready.\n$(RESET)"
 
 %.o: %.c $(HEADER)

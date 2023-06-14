@@ -6,7 +6,7 @@
 /*   By: aoudija <aoudija@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 10:58:23 by aoudija           #+#    #+#             */
-/*   Updated: 2023/06/13 13:51:21 by aoudija          ###   ########.fr       */
+/*   Updated: 2023/06/13 15:11:42 by aoudija          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,26 +55,6 @@ int	send_rays(void)
 		g_data->addr = mlx_get_data_addr(g_data->img, &g_data->bits_per_pixel, &g_data->line_length,
 									&g_data->endian);
 
-	int w,h;
-	void *img_ptr = mlx_xpm_file_to_image(g_data->mlx, "Amin-64_64-xpm.xpm", &w, &h);
-	int bits_p_pixel;
-	int size_line;
-	int endian;
-	char *img_data = mlx_get_data_addr(img_ptr, &bits_p_pixel, &size_line, &endian);
-	x = y = j = 0;
-	while (x < 64)
-	{
-		y = 0;
-		while (y < 64)
-		{
-			g_crd->color = (int)(img_data[(int)y * size_line + ((int)x * bits_p_pixel) / 8]);
-			my_mlx_pixel_put(x, y, g_crd->color);
-			y++;
-		}
-		x++;
-	}
-	mlx_put_image_to_window(g_data->mlx,g_data->win, g_data->img, 0, 0);
-	return (1);
 	if (g_crd->alpha < 30)
 		temp_angle = (330 + g_crd->alpha);
 	else
@@ -103,6 +83,7 @@ int	send_rays(void)
 		// dda(g_crd->px * 64, g_crd->py * 64, x, y , 0x0055c63f);
 		temp_angle+=0.11;
 	}
+	mlx_put_image_to_window(g_data->mlx,g_data->win, g_data->img, 0, 0);
 	return (1);
 }
 

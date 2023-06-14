@@ -17,13 +17,11 @@ int	ip_y_h()
 	int	y;
 	int	v;
 
-	// printf("y_h:direction: %d\n", g_crd->dir);
 	if (g_crd->alpha <= 360 && g_crd->alpha >= 270)
 		v = -64;
 	else
 		v = 64;
 	y = (int)(g_crd->py) * 64 + v;
-	// printf("y_h: %d\n", y);
 	return (y);
 }
 
@@ -33,7 +31,6 @@ int	ip_x_h()
 
 	x = (int)(g_crd->px * 64
 		+ (g_crd->py * 64 - ip_y_h()) / tan(g_crd->alpha * radian));
-	// printf("x_h: %d\n", x);
 	return (x);
 }
 

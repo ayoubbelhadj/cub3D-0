@@ -6,7 +6,7 @@
 /*   By: aoudija <aoudija@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 16:02:05 by abelhadj          #+#    #+#             */
-/*   Updated: 2023/04/24 05:19:36 by aoudija          ###   ########.fr       */
+/*   Updated: 2023/06/14 16:25:03 by aoudija          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,18 @@
 
 char	*ft_strdup(const char *s)
 {
-	char	*d;
-	size_t	len;
+	int		i;
+	char	*s2;
 
-	len = ft_strlen(s);
-	d = (char *)malloc(sizeof(char) * (len + 1));
-	if (!d)
+	i = 0;
+	s2 = (char *)malloc(ft_strlen(s) + 1);
+	if (s2 == NULL)
 		return (NULL);
-	ft_memmove(d, s, len + 1);
-	return (d);
+	while (s[i])
+	{
+		s2[i] = s[i];
+		i++;
+	}
+	s2[i] = 0;
+	return (s2);
 }
