@@ -6,11 +6,11 @@
 /*   By: aoudija <aoudija@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:32:15 by aoudija           #+#    #+#             */
-/*   Updated: 2023/06/14 15:39:50 by aoudija          ###   ########.fr       */
+/*   Updated: 2023/06/15 15:59:12 by aoudija          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cube.h"
+#include "../cube.h"
 
 int	lines_number(char *str)
 {
@@ -79,6 +79,34 @@ char	**fst_part(char **tab)
 	return (fst_part);
 }
 
+int	paths(char **lines)
+{
+	if (!rest_of_line(get_line(lines, "NO"), "NO"))
+		return (0);
+	g_parser->path_no = get_str(rest_of_line(get_line(lines, "NO"), "NO"));
+	if (!rest_of_line(get_line(lines, "SO"), "SO"))
+		return (0);
+	g_parser->path_so = get_str(rest_of_line(get_line(lines, "SO"), "SO"));
+	if (!rest_of_line(get_line(lines, "WE"), "WE"))
+		return (0);
+	g_parser->path_we = get_str(rest_of_line(get_line(lines, "WE"), "WE"));
+	if (!rest_of_line(get_line(lines, "EA"), "EA"))
+		return (0);
+	g_parser->path_ea = get_str(rest_of_line(get_line(lines, "EA"), "EA"));
+	return (1);
+}
+
+int	colors(char **lines)
+{
+	if (!rest_of_line(get_line(lines, "F"), "F"))
+		return (0);
+	g_parser->colorf = get_str(rest_of_line(get_line(lines, "F"), "F"));
+	if (!rest_of_line(get_line(lines, "C"), "C"))
+		return (0);
+	g_parser->colorc = get_str(rest_of_line(get_line(lines, "C"), "C"));
+	return (1);
+}
+
 int	check_lines(char *str)
 {
 	char	**file;
@@ -88,7 +116,10 @@ int	check_lines(char *str)
 	file = file_in_tab(str);
 	lines = fst_part(file);
 	ft_free(file);
-	i = -1;
-	check_no(line_dir(lines, "NO"));
+	if (!paths(lines))
+		return (0);
+	if (!colors(lines))
+		return (0);
+	ft_free(lines);
 	return (1);
 }

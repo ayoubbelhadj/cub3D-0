@@ -6,7 +6,7 @@
 /*   By: aoudija <aoudija@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 14:51:09 by aoudija           #+#    #+#             */
-/*   Updated: 2023/06/14 14:07:38 by aoudija          ###   ########.fr       */
+/*   Updated: 2023/06/15 15:53:43 by aoudija          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,21 +75,23 @@ void	draw_line(int x, int y, int color);
 
 typedef struct	s_pars
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	char	**map;
+	char	*path_no;
+	char	*path_so;
+	char	*path_we;
+	char	*path_ea;
+	char	*colorf;
+	char	*colorc;
+	char	**f;
+	char	**c;
 }				t_pars;
 t_pars	*g_parser;
 int		parsing(char *str);
 int		dot_cub(char *arg);
 int 	all_white(char *str);
 int		check_lines(char *str);
-char	*line_dir(char **tab, char *dir);
-int		check_no(char *str);
+char	*get_line(char **tab, char *str);
+char	*rest_of_line(char *line, char *str);
+char	*get_str(char *str);
+int		check_colors();
 
 #endif

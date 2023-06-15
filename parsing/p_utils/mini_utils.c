@@ -6,7 +6,7 @@
 /*   By: aoudija <aoudija@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 11:05:28 by aoudija           #+#    #+#             */
-/*   Updated: 2023/06/14 12:20:29 by aoudija          ###   ########.fr       */
+/*   Updated: 2023/06/15 16:02:13 by aoudija          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,15 @@ int all_white(char *str)
 			return (0);
 	}
 	return(1);
+}
+
+int dot_cub(char *str)
+{
+	if (ft_strcmp(str + (ft_strlen(str) - ft_strlen(".cub"))
+		, ".cub") || open(str, O_RDWR) < 0)
+	{
+		printf("Error\nfile_err\n");
+		return (0);
+	}
+	return (1);
 }

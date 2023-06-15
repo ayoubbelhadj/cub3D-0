@@ -1,108 +1,110 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_no.c                                         :+:      :+:    :+:   */
+/*   check_dir.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoudija <aoudija@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 12:35:22 by aoudija           #+#    #+#             */
-/*   Updated: 2023/06/14 17:04:05 by aoudija          ###   ########.fr       */
+/*   Updated: 2023/06/14 18:36:48 by aoudija          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cube.h"
 
-char	*line_dir(char **tab, char *dir)
+char	*get_line(char **tab, char *str)
 {
     int		i;
     int		j;
     int		b;
-    char	*str;
+    char	*line;
 
 	b = -1;
 	i = -1;
-	str = NULL;
+	line = NULL;
 	while (tab[++i])
 	{
 		j = -1;
 		while (tab[i][++j])
 		{
-			if (tab[i][j] == dir[0] && b == -1)
+			if (tab[i][j] == str[0])
 			{
-				b = 0;
-				if (tab[i][j + 1] && tab[i][j + 1] == dir[1])
-					str = ft_strdup(tab[i]), b = 1;
+				if (!str[1] && b != 1)
+					(line = ft_strdup(tab[i]), b = 1);
+				else if (tab[i][j + 1]
+					&& tab[i][j + 1] == str[1] && b != 1)
+					(line = ft_strdup(tab[i]), b = 1);
 			}
 		}
 	}
-	return (str);
+	return (line);
 }
-char	*dir(char *str)
+
+char	*fst_partof_line(char *line)
 {
 	char	*dir;
 	int		i;
 	int		j;
 
+	if (!line)
+		return (NULL);
 	dir = NULL;
 	i = 0;
-	if (str[0] == ' ' || str[0] == '\t')
+	if (line[0] == ' ' || line[0] == '\t')
 	{
-		while ((str[i] == ' ' || str[i] == '\t') && str[i])
+		while ((line[i] == ' ' || line[i] == '\t') && line[i])
 			i++;
 	}
 	j = i;
-	while (str[i] != ' ' && str[i] != '\t' && str[i])
+	while ((line[i] != ' ' && line[i] != '\t') && line[i])
 		i++;
-	dir = ft_substr(str, j, i);
+	dir = ft_substr(line, j, i - j);
 	return (dir);
 }
 
-char	*path(char *str)
+char	*get_str(char *str)
 {
 	char	*path;
 	int		i;
 	int		j;
 
-	path = NULL;
+	if (!str)
+		return (NULL);
 	i = 0;
 	if (str[0] == ' ' || str[0] == '\t')
-	{
 		while ((str[i] == ' ' || str[i] == '\t') && str[i])
 			i++;
-	}
-	while (str[i] != ' ' && str[i] != '\t' && str[i])
-		i++;
-	while ((str[i] == ' ' || str[i] == '\t') && str[i])
-		i++;
 	j = i;
-	while ((str[i] != ' ' && str[i] != '\t' && str[i] != '\n') && str[i])
+	while ((str[i] != ' ' && str[i] != '\t'
+		&& str[i] != '\n') && str[i])
 		i++;
-	if (j == i)
+	if (i == j)
 		return (NULL);
 	path = ft_substr(str, j, i - j);
-	while (str[i])
-	{
+	while (str[++i])
 		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
 			return (NULL);
-		i++;
-	}
 	return (path);
 }
 
-int	check_no(char *str)
+char	*rest_of_line(char *line, char *str)
 {
 	int		i;
-	char	*line;
+	char	*rest;
+	char	*d;
 
-	i = 0;
-	if (!str)
+	if (!line)
 		return (0);
-	while ((str[i] == ' ' || str[i] == '\t') && str[i])
+	i = 0;
+	while ((line[i] == ' ' || line[i] == '\t') && line[i])
 		i++;
-	line = ft_strdup(str + i);
-	free(str);
-	// printf("$%s$", line);
-	// printf("direction:|%s|\n", dir(line));
-	printf("path:|%s|", path(line));
-	return (1);
+	d = fst_partof_line(line + i);
+	if (!d)
+		return (NULL);
+	if (ft_strcmp(d, str))
+		return (NULL);
+	rest = ft_substr(line, i + ft_strlen(d),
+		ft_strlen(line) - i + ft_strlen(d));
+	free(line);
+	return (rest);
 }
