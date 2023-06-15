@@ -6,7 +6,7 @@
 /*   By: aoudija <aoudija@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 14:51:09 by aoudija           #+#    #+#             */
-/*   Updated: 2023/06/15 15:53:43 by aoudija          ###   ########.fr       */
+/*   Updated: 2023/06/15 23:08:22 by aoudija          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int		check_lines(char *str);
 char	*get_line(char **tab, char *str);
 char	*rest_of_line(char *line, char *str);
 char	*get_str(char *str);
-int		check_colors();
+int		check_colors(void);
+int		accessible(void);
 
 #endif

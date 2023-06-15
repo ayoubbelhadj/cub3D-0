@@ -6,7 +6,7 @@
 #    By: aoudija <aoudija@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/02 14:44:25 by aoudija           #+#    #+#              #
-#    Updated: 2023/06/15 16:08:01 by aoudija          ###   ########.fr        #
+#    Updated: 2023/06/15 23:08:59 by aoudija          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ LIBFT = $(addprefix  libft/, ft_isdigit ft_memset  ft_isprint ft_putendl_fd ft_i
 AMINE = cube player_coordinates get_next_line/get_next_line intersection_points \
 		distance_to_the_silce DDA player_moves  ray parsing/parsing parsing/check_lines \
 		parsing/p_utils/mini_utils parsing/p_utils/first_part_lines parsing/check_colors \
+		parsing/accessible \
 
 FILES = $(AMINE) $(LIBFT)
 

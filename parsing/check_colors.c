@@ -6,7 +6,7 @@
 /*   By: aoudija <aoudija@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 14:26:33 by aoudija           #+#    #+#             */
-/*   Updated: 2023/06/15 16:08:44 by aoudija          ###   ########.fr       */
+/*   Updated: 2023/06/15 22:42:34 by aoudija          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,15 @@ int	check_length(char **str)
 	int	i;
 	int	j;
 
+	if (str[0] == 0)
+		return (0);
 	i = -1;
 	j = -1;
 	while (str[++i])
 	{
-		if (ft_strlen(str[i]) < 1)
+		if (ft_strlen(str[i]) < 1 || ft_strlen(str[i]) > 3)
+			return (0);
+		if (ft_atoi(str[i]) > 255)
 			return (0);
 	}
 	return (1);

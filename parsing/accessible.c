@@ -1,39 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   accessibile.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoudija <aoudija@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 16:32:40 by aoudija           #+#    #+#             */
-/*   Updated: 2023/06/15 23:38:49 by aoudija          ###   ########.fr       */
+/*   Created: 2023/06/15 23:03:32 by aoudija           #+#    #+#             */
+/*   Updated: 2023/06/15 23:31:17 by aoudija          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube.h"
 
-void	printerr(int e)
+int	accessible(void)
 {
-	printf("Error\n");
-	if (e == 1)
-		printf("check extension");
-	else if (e == 2)
-		printf("check file");
-	else if (e == 3)
-		printf("check colors");
-	else if (e == 4)
-		printf("check the paths");
-}
+	int	fd;
 
-int parsing(char *str)
-{
-	if (!dot_cub(str))
-		return (printerr(1), 0);
-	if (!check_lines(str))
-		return (printerr(2), 0);
-	if (!check_colors())
-		return (printerr(3), 0);
-	if (!accessible())
-		return (printerr(4), 0);
+	fd = open(g_parser->path_ea, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	close(fd);
+	fd = open(g_parser->path_no, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	close(fd);
+	fd = open(g_parser->path_so, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	close(fd);
+	fd = open(g_parser->path_we, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	close(fd);
 	return (1);
 }
