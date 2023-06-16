@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abelhadj <abelhadj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/09 21:18:58 by abelhadj          #+#    #+#             */
-/*   Updated: 2023/06/07 16:43:44 by abelhadj         ###   ########.fr       */
+/*   Created: 2023/02/15 16:14:54 by abelhadj          #+#    #+#             */
+/*   Updated: 2023/06/07 16:51:38 by abelhadj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+char	*read_map(int fd)
 {
-	size_t			i;
-	unsigned char	*str1;
-	unsigned char	*str2;
+	char	*buff;
+	char	*map;
+	char	*tmp;
 
-	i = 0;
-	str1 = (unsigned char *)s1;
-	str2 = (unsigned char *)s2;
-	if (n == 0)
-		return (0);
-	while (str1[i] && str2[i] && str1[i] == str2[i] && i < n - 1)
-		i++;
-	return (str1[i] - str2[i]);
+	map = ft_calloc(1, 1);
+	while (1)
+	{
+		buff = get_next_line(fd);
+		if (!buff)
+			break ;
+		if (ft_strlen(buff) <= 1)
+			ft_error("ERROR!\nEmpty line in map.\n");
+		tmp = ft_strdup(map);
+		free(map);
+		map = ft_strjoin(tmp, buff);
+		free(tmp);
+		free(buff);
+	}
+	return (map);
 }
